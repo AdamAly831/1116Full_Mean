@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="angular/angular.min.js" charset="utf-8"></script>
+        <script>
+            var app = angular.module('app', []);
+
+            app.factory('UserFactory', function($http) {
+                console.log('User Factory Loaded Up');
+                var factory = {};
+
+                factory.index = function(callback) {
+                    console.log('Index Method of User Factory');
+                    $http.get('/users').then(function(res) {
+                        if (callback && typeof callback == "function") {
+                            callback(res.data);
+                        }
+                    })
+                }
+
+                factory.create = function(newUser, callback) {
+                    console.log('Create Method of User Factory');
+                    console.log(newUser);
+                    $http.post('/users', newUser).then(function(res) {
+                        if (callback && typeof callback == "function") {
+                            callback();
+                        }
+                    })
+                }
+
+                return factory;
+            })
+
+            app.controller('MessagesController', function($scope, UserFactory) {
+                console.log('MessagesController loaded up')
+                $scope.users = [];
+                UserFactory.index(function(data) {
+                    console.log(data);
+                    $scope.users = data;
+                })
+
+                $scope.createUser = function() {
+                    console.log('Create User Method')
+                    UserFactory.create($scope.newUser, function(data) {
+                        console.log('back to controller in create')
+                        // $scope.users = data;
+                    })
+                }
+            })
+        </script>
+    </head>
+    <body ng-app="app">
+        <div ng-controller="MessagesController">
+            <h1>Hi everyone</h1>
+            <form ng-submit="createUser()">
+                <input type="text" ng-model="newUser.name">
+                <input type="text" ng-model="newUser.age">
+                <input type="submit">
+            </form>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in users">
+                        <td ng-bind="user.name"></td>
+                        <td ng-bind="user.age"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

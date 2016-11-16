@@ -1,0 +1,17 @@
+{
+  "name": "express_and_mongoose",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Howard Jiang <howard.yunghao.jiang@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/brendan-codes/modularized_node",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

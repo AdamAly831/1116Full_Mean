@@ -1,0 +1,42 @@
+'1116FullMean' = {
+    .git: {},
+    bower_components: {
+        angular
+    },
+    node_modules: {
+        ...
+    },
+
+    client: {
+        partials: {
+            user.html,
+            dashboard.html
+        },
+        css: {
+            style.css
+        },
+        js: {
+            ...
+        },
+        index.html
+    },
+    server: {
+        config: {
+            mongoose.js,
+            routes.js
+        },
+        controllers: {
+            messages.js,
+            users.js
+        },
+        models: {
+            Message.js,
+            User.js
+        }
+    },
+
+    bower.json,
+    package.json,
+
+    server.js
+}
